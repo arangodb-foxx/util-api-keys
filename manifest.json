@@ -1,0 +1,24 @@
+{
+  "name": "api-keys",
+  "version": "0.0.1",
+  "description": "A foxx library to manage create, manage and keep track of API key given out for your foxx apis.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arangodb/foxx-api-keys.git"
+  },
+  "author": "ArangoDB GmbH",
+  "contributors": [
+    {
+      "name": "Michael Hackstein",
+      "email": "michael@arangodb.com"
+    }
+  ],
+  "keywords": [
+    "api-keys"
+  ],
+  "engines": {
+    "arangodb": "2.5"
+  },
+  "setup": "scripts/setup.js",
+  "exports": "exports.js"
+}
