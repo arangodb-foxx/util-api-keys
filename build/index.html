@@ -49,7 +49,7 @@
             </tr>
             <tr ng-repeat="key in keyList">
               <td>{{key.key}}</td>
-              <td>{{key.plan}}</td>
+              <td>{{planMap[key.plan]}}</td>
               <td>{{key.active}}</td>
               <td>
                 <button class="neutral" ng-click="showSelectPlan(key)">Change Plan</button>
@@ -109,7 +109,7 @@
       <div>
         <span class="copyright">Copyright (c) ArangoDB GmbH</span>
         <span>Foxx Api Key Manager</span>
-        <span class="version">v 0.0.1</span>
+        <span class="version">v 1.0.0</span>
       </div>
     </footer>
   </body>

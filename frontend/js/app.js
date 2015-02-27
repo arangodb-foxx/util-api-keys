@@ -7,7 +7,12 @@
 
     $http.get("plan")
     .success(function(response) {
+      $scope.planMap = {};
       $scope.planList = response || [];
+      for (var i = 0; i < $scope.planList.length; ++i) {
+        $scope.planMap[$scope.planList[i].key] = $scope.planList[i].name;
+      }
+      console.log($scope.planMap);
     });
 
     $scope.clearInfo = function() {
@@ -35,10 +40,18 @@
       $scope.tab = "plans";
       $http.get("plan")
       .success(function(response) {
+        $scope.planMap = {};
         $scope.planList = response;
+        for (var i = 0; i < $scope.planList.length; ++i) {
+          $scope.planMap[$scope.planList[i].key] = $scope.planList[i].name;
+        }
       })
       .error(function(response) {
+      $scope.planMap = {};
         $scope.planList = $scope.planList || [];
+        for (var i = 0; i < $scope.planList.length; ++i) {
+          $scope.planMap[$scope.planList[i].key] = $scope.planList[i].name;
+        }
         $scope.error = "Could not refresh plans. Reason: " + response.errorMessage;
       });
     };
@@ -83,10 +96,18 @@
       $scope.view = "selectPlan";
       $http.get("plan")
       .success(function(response) {
+        $scope.planMap = {};
         $scope.planList = response;
+        for (var i = 0; i < $scope.planList.length; ++i) {
+          $scope.planMap[$scope.planList[i].key] = $scope.planList[i].name;
+        }
       })
       .error(function(response) {
+        $scope.planMap = {};
         $scope.planList = $scope.planList || [];
+        for (var i = 0; i < $scope.planList.length; ++i) {
+          $scope.planMap[$scope.planList[i].key] = $scope.planList[i].name;
+        }
         $scope.error = "Could not refresh plans. Reason: " + response.errorMessage;
       });
     };
