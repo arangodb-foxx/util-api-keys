@@ -1,6 +1,6 @@
 {
   "name": "api-keys",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A foxx library to manage create, manage and keep track of API key given out for your foxx apis.",
   "repository": {
     "type": "git",
