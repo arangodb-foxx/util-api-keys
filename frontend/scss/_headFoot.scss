@@ -1,0 +1,58 @@
+%bar {
+  background: $c-header;
+  color: $c-header-text;
+  height: 40px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  text-align: center;
+}
+
+body {
+  background: $c-body;
+}
+
+nav {
+  @extend %bar;
+
+  top: 0;
+
+  button {
+    @extend %clickable;
+    @include border-top-radius(15px);
+
+    background: $c-tab;
+    border: 0 solid $c-tab;
+    color: $c-header-text;
+    height: 40px;
+    width: 80px;
+
+    &.selected,
+    &:hover {
+      background: $c-body;
+      color: $c-body-text;
+    }
+  }
+}
+
+footer {
+  @extend %bar;
+
+  bottom: 0;
+
+  div {
+    padding-top: 9px;
+    position: relative;
+    width: 100%;
+
+    .copyright {
+      left: 10px;
+      position: absolute;
+    }
+
+    .version {
+      position: absolute;
+      right: 10px;
+    }
+  }
+}

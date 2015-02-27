@@ -25,5 +25,12 @@
   },
   "exports": {
     "apiKeys": "exports.js"
-  }
+  },
+  "files": {
+    "/index.html": "build/index.html",
+    "/app.js": "build/app.js",
+    "/style.css": "build/style.css",
+    "/fonts": "fonts"
+  },
+  "defaultDocument": "index.html"
 }

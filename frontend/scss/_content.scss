@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+}
+
+section.content {
+  padding-top: 40px;
+
+  h2 {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+section.success {
+  background: mix($c-success, #fff);
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+section.error {
+  background: mix($c-error, #fff);
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}

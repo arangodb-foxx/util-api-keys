@@ -23,19 +23,37 @@
 
   /** Define new base plan
    *
-   * This functions i used to define a baseplan for
+   * This functions is used to define a baseplan for
    * api key definitions.
    * This plan contains  default refresh rates and
    * new apikeys can be spawned from existing plans
    */
   controller.post("/plan", function(req, res) {
     let plan = req.params("plan");
-    res.json(plans.save({
+    let save = plans.save({
       refills: plan.refills,
       name: plan.name
-    }));
+    });
+    res.json({
+      id: save._key,
+      name: plan.name
+    });
   }).bodyParam("plan", {
     type: planSchema
+  });
+
+  /** List all plans
+   *
+   * Lists all available plans
+   */
+  controller.get("/plan", function(req, res) {
+    let result = [];
+    let cursor = plans.all();
+    while (cursor.hasNext()) {
+      let doc = cursor.next();
+      result.push({key: doc._key, name: doc.name});
+    }
+    res.json(result);
   });
 
   /** Load base plan
@@ -87,7 +105,7 @@
     let cursor = keys.all();
     while (cursor.hasNext()) {
       let doc = cursor.next();
-      result.push({key: doc._key, plan: doc.plan});
+      result.push({key: doc._key, plan: doc.plan, active: !doc.disabled});
     }
     res.json(result);
   });
@@ -129,8 +147,12 @@
     }, {
       keepNull: false
     });
-    res.json(
-    );
+    res.json({
+      plan: plan,
+      bucket: refills,
+      active: true,
+      key: key
+    });
   }).pathParam("key", {type: keyType.description("An apikey.")})
   .pathParam("plan", {type: keyType.description("The id of a plan")});
 
@@ -140,11 +162,13 @@
    */
   controller.delete("/key/:key", function(req, res) {
     let key = req.params("key");
-    res.json(
-      keys.update(key, {
-        disabled: true
-      })
-    );
+    keys.update(key, {
+      disabled: true
+    });
+    res.json({
+      active: false,
+      key: key
+    });
   }).pathParam("key", {type: keyType.description("An apikey.")});
 
 }());

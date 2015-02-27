@@ -1,0 +1,26 @@
+%clickable {
+  cursor: pointer;
+}
+
+@mixin border-radius($r) {
+  -moz-border-radius: $r;
+  -webkit-border-radius: $r;
+  border-radius: $r;
+}
+
+@mixin border-top-radius($r) {
+  -moz-border-top-right-radius: $r;
+  -webkit-border-top-right-radius: $r;
+  border-top-right-radius: $r;
+  -moz-border-top-left-radius: $r;
+  -webkit-border-top-left-radius: $r;
+  border-top-left-radius: $r;
+}
+
+@mixin border-shadow($c) {
+  border-bottom-color: mix($c, #000);
+  border-right-color: mix($c, #000);
+
+  border-top-color: mix($c, #fff);
+  border-left-color: mix($c, #fff);
+}

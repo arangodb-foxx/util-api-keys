@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Foxx Api Key Manager</title>
+    <meta name="description" content="Foxx Api Key Manager">
+    <meta name="author" content="Michael Hackstein">
+    <link href="style.css" rel="stylesheet">
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body ng-app="keyManager" ng-controller="manager">
+    <nav>
+    <button ng-click="showKeys()" ng-class="{selected: tab === 'keys'}">Keys</button>
+      <button ng-click="showPlans()" ng-class="{selected: tab === 'plans'}">Plans</button>
+    </nav>
+    <section class="error" ng-show="error">
+      {{ error }}
+    </section>
+    <section class="success" ng-show="success">
+      {{ success }}
+    </section>
+    <section class="content">
+      <div ng-switch="view">
+        <div ng-switch-when="plans">
+          <h2>Available Plans</h2>
+          <h2><button class="success" ng-click="showNewPlan()">Add Plan</button></h2>
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th></th>
+            </tr>
+            <tr ng-repeat="plan in planList" ng-click="showDetails(plan.key)">
+              <td>{{plan.key}}</td>
+              <td>{{plan.name}}</td>
+              <td>
+                <button class="success" ng-click="createNewKey(plan.key);$event.stopPropagation()">New Key</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div ng-switch-when="keys">
+          <h2>Available Api Keys</h2>
+          <table>
+            <tr>
+              <th>Key</th>
+              <th>Plan</th>
+              <th>Active</th>
+              <th></th>
+            </tr>
+            <tr ng-repeat="key in keyList">
+              <td>{{key.key}}</td>
+              <td>{{key.plan}}</td>
+              <td>{{key.active}}</td>
+              <td>
+                <button class="neutral" ng-click="showSelectPlan(key)">Change Plan</button>
+                <button class="danger" ng-click="disableKey(key)" ng-show="key.active">Disable</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div ng-switch-when="selectPlan">
+          <h2>Select Plan for Api Key {{currentKey.key}}</h2>
+          <button class="neutral planlist" ng-repeat="plan in planList" ng-click="changePlan(currentKey.key, plan.key)">{{plan.name}}</button>
+        </div>
+        <div ng-switch-when="planDetails">
+          <h2>Request limits in {{ currentPlan.name }}</h2>
+          <table>
+            <tr>
+              <th>Bucket</th>
+              <th>Hour</th>
+              <th>Day</th>
+              <th>Month</th>
+            </tr>
+            <tr ng-repeat="(name,rate) in currentPlan.refills">
+              <td>{{name}}</td>
+              <td>{{rate.hour}}</td>
+              <td>{{rate.day}}</td>
+              <td>{{rate.month}}</td>
+            </tr>
+          </table>
+        </div>
+        <div ng-switch-when="newPlan">
+          <h2>Create a new Plan</h2>
+          <form name="editPlanForm">
+            <h2><input placeholder="Plan Name" required ng-pattern="/^[a-zA-Z]+$/" ng-model="editPlan.name">
+              <button class="success" ng-click="addRow()">Add Bucket</button></h2>
+            <table>
+              <tr>
+                <th>Bucket</th>
+                <th>Hour</th>
+                <th>Day</th>
+                <th>Month</th>
+                <th></th>
+              </tr>
+              <tr ng-repeat="bucket in editPlan.buckets" ng-model="editPlan.buckets">
+                <td><input placeholder="Name" ng-model="bucket.name" ng-pattern="/^[a-zA-Z]+$/" required/></td>
+                <td><input placeholder="Hour" ng-model="bucket.hour" ng-pattern="/^((Infinity)|(\d+)|())$/"/></td>
+                <td><input placeholder="Day" ng-model="bucket.day" ng-pattern="/^((Infinity)|(\d+)|())$/"/></td>
+                <td><input placeholder="Month" ng-model="bucket.month" ng-pattern="/^((Infinity)|(\d+)|())$/"/></td>
+                <td><button class="danger" ng-click="removeRow($index)">Delete</button></td>
+              </tr>
+            </table>
+            <button class="success" ng-click="createNewPlan()" ng-disabled="!editPlanForm.$valid">Save</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div>
+        <span class="copyright">Copyright (c) ArangoDB GmbH</span>
+        <span>Foxx Api Key Manager</span>
+        <span class="version">v 0.0.1</span>
+      </div>
+    </footer>
+  </body>
+</html>
