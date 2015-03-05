@@ -10,6 +10,7 @@
     keyType = joi.string().required(),
     keys = applicationContext.collection("keys"),
     plans = applicationContext.collection("plans"),
+    crypto = require("org/arangodb/crypto"),
     refillsSchema = joi.object().pattern(/\.*/, joi.object().keys({
       hour: joi.number().integer().optional().description("Hourly refill rate"),
       day: joi.number().integer().optional().description("Daily refill rate"),
@@ -88,6 +89,7 @@
   controller.post("/key/:plan", function(req, res) {
     let plan = req.params("plan");
     let newKey = keys.save({
+      _key: crypto.genRandomAlphaNumbers(32),
       plan: plan
     });
     res.json({
