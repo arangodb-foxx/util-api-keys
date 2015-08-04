@@ -1,6 +1,5 @@
 %btn {
   @extend %clickable;
-  @include border-radius(10px);
   border-width: 2px;
   display: inline-block;
   padding: 4px 12px;
@@ -8,39 +7,33 @@
 
 button.danger {
   @extend %btn;
-  @include border-shadow($c-error);
 
   background: $c-error;
   color: $c-header-text;
 
   &:hover {
-    @include border-shadow($c-error-hover);
     background: $c-error-hover;
   }
 }
 
 button.neutral {
   @extend %btn;
-  @include border-shadow($c-neutral);
 
   background: $c-neutral;
   color: $c-header-text;
 
   &:hover {
-    @include border-shadow($c-neutral-hover);
     background: $c-neutral-hover;
   }
 }
 
 button.success {
   @extend %btn;
-  @include border-shadow($c-success);
 
   background: $c-success;
   color: $c-header-text;
 
   &:hover {
-    @include border-shadow($c-success-hover);
     background: $c-success-hover;
   }
 }

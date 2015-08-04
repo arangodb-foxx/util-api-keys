@@ -26240,7 +26240,7 @@ var minlengthDirective = function() {
       });
     };
 
-    $scope.showKeys();
+    $scope.showPlans();
   });
 
 }());

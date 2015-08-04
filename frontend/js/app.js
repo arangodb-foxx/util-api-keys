@@ -181,7 +181,7 @@
       });
     };
 
-    $scope.showKeys();
+    $scope.showPlans();
   });
 
 }());
