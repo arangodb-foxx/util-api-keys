@@ -17,9 +17,11 @@
     "api-keys"
   ],
   "engines": {
-    "arangodb": "2.5"
+    "arangodb": ">=2.5"
   },
-  "setup": "scripts/setup.js",
+  "scripts": {
+    "setup": "scripts/setup.js"
+  },
   "controllers": {
     "/": "controller.js"
   },
